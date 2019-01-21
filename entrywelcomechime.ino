@@ -53,14 +53,14 @@ int isNight(){
 }
 
 void loop () {
-  
   val = digitalRead(BUTTON);
   oldval = val;
   while(val == HIGH){
+    digitalWrite(13, HIGH);
     if (oldval != val) {
     Serial.println("on");
     }
-    trackNum = 1 + random(2);
+    trackNum = random(3);
     is_night = isNight();
     Serial.println(is_night);
     if (is_night == 0) {
@@ -72,10 +72,13 @@ void loop () {
       Serial.println("Now playing folder 2 track " + (String)mp3.getTrackNo());
     }
    
-    delay(3000);
+    delay(4000);
     val = digitalRead(BUTTON);
+    Serial.println("while last");
+    Serial.println(val);
   }
   if (oldval != val) {
+    digitalWrite(13, LOW);
     Serial.println("off");
     }
 }
